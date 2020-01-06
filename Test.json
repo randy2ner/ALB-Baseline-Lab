@@ -312,15 +312,15 @@
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('WAPvmPubIP'))]"
                             },
-                            "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('WAPSecurityGroupName'))]"
-                            },
                             "subnet": {
                                 "id": "[variables('subnetRef')]"
                             }
                         }
                     }
-                ]
+                ],
+                "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('WAPSecurityGroupName'))]"
+                }
             }
         },
         {
