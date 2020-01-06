@@ -52,16 +52,16 @@
         }
     },
     "variables": {
-        "storageAccountName": "[concat('ALBStorage', substring(uniqueString(resourceGroup().id),0,6))]",
+        "storageAccountName": "[concat('ALBStorage', uniquestring(resourceGroup().id))]",
         "addressPrefix": "10.0.0.0/16",
         "subnetName": "Subnet",
         "subnetPrefix": "10.0.0.0/24",
         "DCvmName": "[concat(parameters('VMNamePrefix'), 'DC')]",
         "ADFSvmName": "[concat(parameters('VMNamePrefix'), 'ADFS')]",
-        "DCvmPubIP": "[concat(parameters('DCvmName'), '-IP')]",
-        "ADFSvmPubIP": "[concat(parameters('DCvmName'), '-IP')]",
-        "DCvmNIC": "[concat(parameters('DCvmName'), '-NIC')]",
-        "ADFSvmNIC": "[concat(parameters('DCvmName'), '-NIC')]",
+        "DCvmPubIP": "[concat(variables('DCvmName'), '-IP')]",
+        "ADFSvmPubIP": "[concat(variables('DCvmName'), '-IP')]",
+        "DCvmNIC": "[concat(variables('DCvmName'), '-NIC')]",
+        "ADFSvmNIC": "[concat(variables('DCvmName'), '-NIC')]",
         "virtualNetworkName": "ALBVNET",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
         "networkSecurityGroupName": "default-NSG"
