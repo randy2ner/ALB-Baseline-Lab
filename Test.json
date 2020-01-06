@@ -170,7 +170,7 @@
                     {
                         "name": "default-allow-443",
                         "properties": {
-                            "priority": 1000,
+                            "priority": 1010,
                             "access": "Allow",
                             "direction": "Inbound",
                             "destinationPortRange": "443",
