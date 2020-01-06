@@ -52,7 +52,7 @@
         }
     },
     "variables": {
-        "storageAccountName": "[concat('ALBStorage', uniquestring(resourceGroup().id))]",
+        "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'ALBStorage')]",
         "addressPrefix": "10.0.0.0/16",
         "subnetName": "Subnet",
         "subnetPrefix": "10.0.0.0/24",
