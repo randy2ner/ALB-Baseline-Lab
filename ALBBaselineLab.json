@@ -75,7 +75,7 @@
         "virtualNetworkName": "ALBVNET",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
         "networkSecurityGroupName": "default-NSG",
-        "WAPSecurityGroupName": "WAP-NSG"
+        "WAPSecurityGroupName": "WAP-NSG",
         "location": "[resourceGroup().location]"
     },
     "resources": [
