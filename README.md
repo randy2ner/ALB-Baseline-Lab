@@ -8,7 +8,7 @@ ARM Template Deployment of the on premises domain for the Azure Lab Builders Bas
     <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.png"/>
 </a>
 
-ARM Deployment will create 4 VMs named based on a Prefix provided:
+This ARM Deployment will create 4 VMs named based on a Prefix provided:
 Domain Controller
 Azure AD Connect Server
 ADFS Server
