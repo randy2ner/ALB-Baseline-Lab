@@ -24,11 +24,7 @@
             "type": "string",
             "defaultValue": "2019-Datacenter",
             "allowedValues": [
-                "2008-R2-SP1",
-                "2012-Datacenter",
                 "2012-R2-Datacenter",
-                "2016-Nano-Server",
-                "2016-Datacenter-with-Containers",
                 "2016-Datacenter",
                 "2019-Datacenter"
             ],
@@ -499,6 +495,27 @@
                     }
                 }
             }  
+        },
+        {
+            "name": "[concat('shutdown-computevm-',variables('ADFSvmName'))]",
+            "type": "Microsoft.DevTestLab/schedules",
+            "apiVersion": "2018-09-15",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                    "[resourceId('Microsoft.Compute/virtualMachines/', variables('ADFSvmName'))]"
+                    ],
+            "properties": {
+                "status": "Enabled",
+                "taskType": "ComputeVmShutdownTask",
+                "dailyRecurrence": {
+                "time": "1900"
+                },
+                "timeZoneId": "Eastern Standard Time",
+                "notificationSettings": {
+                "status": "Disabled"
+                },
+                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines/', variables('ADFSvmName'))]"
+            }
         }
     ]
 }
