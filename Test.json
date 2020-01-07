@@ -230,7 +230,7 @@
                         "name": "ipconfig1",
                         "properties": {
                             "privateIPAddress": "10.0.0.100",
-                            "privateIPAllocationMethod": "Dynamic",
+                            "privateIPAllocationMethod": "Static",
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('DCvmPubIP'))]"
                             },
