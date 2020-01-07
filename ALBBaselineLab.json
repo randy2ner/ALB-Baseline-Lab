@@ -245,7 +245,7 @@
                     {
                         "name": "ipconfig1",
                         "properties": {
-                            "privateIPAddress": "10.0.0.100",
+                            "privateIPAddress": "[variables('dnsServer')]",
                             "privateIPAllocationMethod": "Static",
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('DCvmPubIP'))]"
