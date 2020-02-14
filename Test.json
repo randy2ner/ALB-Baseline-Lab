@@ -60,7 +60,7 @@
         "subnetName1": "LANSubnet",
         "subnetPrefix1": "10.9.0.0/24",
 	"subnetName2": "DMZSubnet",
-        "subnetPrefix2": "10.8.0.0/24",    
+        "subnetPrefix2": "10.9.2.0/24",    
         "dnsServer": "10.9.0.100",
         "DCvmName": "[concat(parameters('VMNamePrefix'), 'DC')]",
         "ADFSvmName": "[concat(parameters('VMNamePrefix'), 'ADFS')]",
