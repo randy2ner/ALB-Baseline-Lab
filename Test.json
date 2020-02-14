@@ -56,7 +56,7 @@
     },
     "variables": {
         "storageAccountName": "[concat('albstorage', substring(uniqueString(resourceGroup().id),0,6))]",
-	    "addressPrefix": "10.9.0.0/16",
+	"addressPrefix": "10.9.0.0/16",
         "subnetName1": "LANSubnet",
         "subnetPrefix1": "10.9.0.0/24",
 	"subnetName2": "DMZSubnet",
@@ -231,7 +231,7 @@
                                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
                             }
                         }
-                    }
+                    },
 		    {
                         "name": "[variables('subnetName2')]",
                         "properties": {
