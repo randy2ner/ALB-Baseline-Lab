@@ -56,9 +56,11 @@
     },
     "variables": {
         "storageAccountName": "[concat('albstorage', substring(uniqueString(resourceGroup().id),0,6))]",
-	    "addressPrefix": "10.9.0.0/16",
-        "subnetName": "Subnet",
-        "subnetPrefix": "10.9.0.0/24",
+	"addressPrefix": "10.9.0.0/16",
+        "subnetName1": "LANSubnet",
+        "subnetPrefix1": "10.9.0.0/24",
+	"subnetName2": "DMZSubnet",
+        "subnetPrefix2": "10.9.2.0/24",    
         "dnsServer": "10.9.0.100",
         "DCvmName": "[concat(parameters('VMNamePrefix'), 'DC')]",
         "ADFSvmName": "[concat(parameters('VMNamePrefix'), 'ADFS')]",
@@ -73,8 +75,9 @@
         "AADCvmNIC": "[concat(variables('AADCvmName'), 'NIC')]",
         "WAPvmNIC": "[concat(variables('WAPvmName'), 'NIC')]",
         "virtualNetworkName": "ALBVNET",
-        "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
-        "networkSecurityGroupName": "default-NSG",
+        "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName1'))]",
+        "subnetRef2": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName2'))]",
+	"networkSecurityGroupName": "default-NSG",
         "WAPSecurityGroupName": "WAP-NSG"
             },
     "resources": [
@@ -126,7 +129,7 @@
             }
         },
         {
-            "comments": "Default Network Security Group for template",
+            "comments": "Default Network Security Group for LANSubnet",
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-08-01",
             "name": "[variables('networkSecurityGroupName')]",
@@ -150,7 +153,7 @@
             }
         },
         {
-            "comments": "Network Security Group for WAP",
+            "comments": "Network Security Group for DMZSubnet",
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-08-01",
             "name": "[variables('WAPSecurityGroupName')]",
@@ -205,7 +208,8 @@
             "name": "[variables('virtualNetworkName')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
+		"[resourceId('Microsoft.Network/networkSecurityGroups', variables('WAPSecurityGroupName'))]"
             ],
             "properties": {
                 "addressSpace": {
@@ -220,11 +224,20 @@
                 },
                 "subnets": [
                     {
-                        "name": "[variables('subnetName')]",
+                        "name": "[variables('subnetName1')]",
                         "properties": {
-                            "addressPrefix": "[variables('subnetPrefix')]",
+                            "addressPrefix": "[variables('subnetPrefix1')]",
                             "networkSecurityGroup": {
                                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+                            }
+                        }
+                    },
+		    {
+                        "name": "[variables('subnetName2')]",
+                        "properties": {
+                            "addressPrefix": "[variables('subnetPrefix2')]",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('WAPSecurityGroupName'))]"
                             }
                         }
                     }
@@ -317,8 +330,7 @@
             "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses/', variables('WAPvmPubIP'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('WAPSecurityGroupName'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
             ],
             "properties": {
                 "ipConfigurations": [
@@ -330,14 +342,11 @@
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('WAPvmPubIP'))]"
                             },
                             "subnet": {
-                                "id": "[variables('subnetRef')]"
+                                "id": "[variables('subnetRef2')]"
                             }
                         }
                     }
-                ],
-                "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('WAPSecurityGroupName'))]"
-                }
+                ]
             }
         },
         {
@@ -602,4 +611,3 @@
         }
     ]
 }
-
