@@ -390,7 +390,8 @@
                         "enabled": true,
                         "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))).primaryEndpoints.blob]"
                     }
-                }
+                },
+		"licenseType": "Windows_Server"
             }
         },
          {
@@ -434,7 +435,8 @@
                         "enabled": true,
                         "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))).primaryEndpoints.blob]"
                     }
-                }
+                },
+		"licenseType": "Windows_Server"
             }
         },
          {
@@ -478,7 +480,8 @@
                         "enabled": true,
                         "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))).primaryEndpoints.blob]"
                     }
-                }
+                },
+		"licenseType": "Windows_Server"
             }
         },
         {
@@ -522,7 +525,8 @@
                         "enabled": true,
                         "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))).primaryEndpoints.blob]"
                     }
-                }
+                },
+		"licenseType": "Windows_Server"
             }  
         },
         {
